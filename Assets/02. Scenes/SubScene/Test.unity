@@ -197,10 +197,10 @@ MonoBehaviour:
   IJobEntity: 0
   Aspects: 0
   Prefabs: 1
-  IJobChunk: 1
+  IJobChunk: 0
   Reparenting: 0
   EnableableComponents: 0
-  GameObjectSync: 0
+  GameObjectSync: 1
 --- !u!4 &1277805268
 Transform:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1866648960
 BoxCollider:
   m_ObjectHideFlags: 0
