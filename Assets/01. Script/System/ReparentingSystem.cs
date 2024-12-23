@@ -32,47 +32,38 @@ namespace HelloCube.Reparenting
             timer = interval;
             var rotatorEntity = SystemAPI.GetSingletonEntity<RotationSpeed>();
             var ecb = new EntityCommandBuffer(Allocator.Temp);
+            // EntityCommandBuffer 이 뭔지 공부해야함
+            /// 엔티티와 컴포넌트의 생성, 삭제, 추가, 수정 등을 예약하기 위한 버퍼
+            /// EntityManager을 사용하면 다른 시스템이 데이터를 사용할 때 충돌 발생 가능!!
+            /// 변경작업을 버퍼에 기록 => 안전한 시점에 실행해서 충돌을 방지가능 
+
+            /// ecb 생성 : new EntityCommandBuffer(Allocator.Temp)
+            /// 기록 : ecb.AddComponent() , ecb.RemoveComponent()
+            /// 실행 : ecb.Playback(EntityManager)
 
             if (attached)
             {
-                // Detach all children from the rotator by removing the Parent component from the children.
-                // (The next time TransformSystemGroup updates, it will update the Child buffer and transforms accordingly.)
-
+                // buffer이 뭐지?
+                // dynamicbuffer????
                 DynamicBuffer<Child> children = SystemAPI.GetBuffer<Child>(rotatorEntity);
                 for (int i = 0; i < children.Length; i++)
-                {
-                    // Using an ECB is the best option here because calling EntityManager.RemoveComponent()
-                    // instead would invalidate the DynamicBuffer, meaning we'd have to re-retrieve
-                    // the DynamicBuffer after every EntityManager.RemoveComponent() call.
+                {     
                     ecb.RemoveComponent<Parent>(children[i].Value);
                 }
 
-                // Alternative solution instead of the above loop:
-                // A single call that removes the Parent component from all entities in the array.
-                // Because the method expects a NativeArray<Entity>, we create a NativeArray<Entity> alias of the DynamicBuffer.
-                /*
-                ecb.RemoveComponent<Parent>(children.AsNativeArray().Reinterpret<Entity>());
-                */
             }
             else
             {
-                // Attach all the small cubes to the rotator by adding a Parent component to the cubes.
-                // (The next time TransformSystemGroup updates, it will update the Child buffer and transforms accordingly.)
-
                 foreach (var (transform, entity) in
                          SystemAPI.Query<RefRO<LocalTransform>>()
                              .WithNone<RotationSpeed>()
-                             .WithEntityAccess())
+                             // 쿼리한 엔티티의 참조
+                             .WithEntityAccess()) 
                 {
                     ecb.AddComponent(entity, new Parent { Value = rotatorEntity });
                 }
 
-                // Alternative solution instead of the above loop:
-                // Add a Parent value to all entities matching a query.
-                /*
-                var query = SystemAPI.QueryBuilder().WithAll<LocalTransform>().WithNone<RotationSpeed>().Build();
-                ecb.AddComponent(query, new Parent { Value = rotatorEntity });
-                */
+  
             }
 
             ecb.Playback(state.EntityManager);

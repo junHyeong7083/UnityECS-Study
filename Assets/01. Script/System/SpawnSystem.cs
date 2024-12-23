@@ -9,7 +9,7 @@ namespace HelloCube.Prefabs
     public partial struct SpawnSystem : ISystem
     {
         uint updateCounter;
-
+       
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
@@ -27,7 +27,7 @@ namespace HelloCube.Prefabs
             {
                 var prefab = SystemAPI.GetSingleton<Spawner>().Prefab;
 
-                var instances = state.EntityManager.Instantiate(prefab, 500, Allocator.Temp);
+                var instances = state.EntityManager.Instantiate(prefab, 1, Allocator.Temp);
 
                 var random = Random.CreateFromIndex(updateCounter++);
 

@@ -13,7 +13,6 @@ namespace HelloCube.Execute
         public bool Reparenting;
         public bool EnableableComponents;
         public bool GameObjectSync;
-
         class Baker : Baker<ExecuteAuthoring>
         {
             public override void Bake(ExecuteAuthoring authoring)
