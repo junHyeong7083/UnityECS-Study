@@ -13,6 +13,7 @@ namespace HelloCube.Execute
         public bool Reparenting;
         public bool EnableableComponents;
         public bool GameObjectSync;
+        public bool StateChange;
         class Baker : Baker<ExecuteAuthoring>
         {
             public override void Bake(ExecuteAuthoring authoring)
@@ -27,6 +28,7 @@ namespace HelloCube.Execute
                 if (authoring.GameObjectSync) AddComponent<GameObjectSync>(entity);
                 if (authoring.Reparenting) AddComponent<Reparenting>(entity);
                 if (authoring.EnableableComponents) AddComponent<EnableableComponents>(entity);
+                if (authoring.StateChange) AddComponent<StateChange>(entity);
             }
         }
     }
@@ -60,6 +62,9 @@ namespace HelloCube.Execute
     }
 
     public struct EnableableComponents : IComponentData
+    {
+    }
+    public struct StateChange : IComponentData
     {
     }
 }

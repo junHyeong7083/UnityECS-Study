@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 532210060}
   - component: {fileID: 532210059}
+  - component: {fileID: 532210061}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532210058}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3aa524a70a7b784886c6dd2bc1f8589, type: 3}
   m_Name: 
@@ -164,6 +165,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &532210061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532210058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20031dd49765934469bddf60149afc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 7980158204693690752, guid: 22dba9b1194cbf740a1ce703d9f71562, type: 3}
+  Size: 100
+  Radius: 30
+  Mode: 1
 --- !u!1 &1277805266
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,11 +213,12 @@ MonoBehaviour:
   MainThread: 0
   IJobEntity: 0
   Aspects: 0
-  Prefabs: 1
+  Prefabs: 0
   IJobChunk: 0
   Reparenting: 0
   EnableableComponents: 0
-  GameObjectSync: 1
+  GameObjectSync: 0
+  StateChange: 1
 --- !u!4 &1277805268
 Transform:
   m_ObjectHideFlags: 0
